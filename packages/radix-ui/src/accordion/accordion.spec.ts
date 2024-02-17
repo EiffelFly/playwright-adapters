@@ -1,77 +1,79 @@
 import { test, expect } from "@playwright/test";
 
-import { RadixAccordionPage } from "./accordion.page";
+import { Target } from "./accordion.page";
 import { accordion } from "./accordion";
 
 test.describe("Radix UI Accordion", () => {
-  test("should open and close the accordion", async ({ page }) => {
-    const radixAccordionPage = new RadixAccordionPage(page);
-    await radixAccordionPage.goto();
+  test("should have correct defaul state", async ({ page }) => {
+    const target = new Target(page);
+    await target.goto();
 
     // Test the default open accordion
-    await expect(radixAccordionPage.firstAccordionItemTrigger).toBeVisible();
-    await accordion.exceptTriggerOpen(
-      radixAccordionPage.firstAccordionItemTrigger,
-      true
+    await expect(target.firstAccordionItemTrigger).toBeVisible();
+    await accordion.exceptTriggerIsOpen(target.firstAccordionItemTrigger, true);
+    const firstAccordionItemContent = await target.getAccordionItemContent(
+      target.firstAccordionItemTrigger
     );
-    const firstAccordionItemContent =
-      await radixAccordionPage.getAccordionItemContent(
-        radixAccordionPage.firstAccordionItemTrigger
-      );
     await expect(firstAccordionItemContent).toBeVisible();
 
     // Test the default closed accordions
-    await expect(radixAccordionPage.secondAccordionItemTrigger).toBeVisible();
-    await accordion.exceptTriggerOpen(
-      radixAccordionPage.secondAccordionItemTrigger,
+    await expect(target.secondAccordionItemTrigger).toBeVisible();
+    await accordion.exceptTriggerIsOpen(
+      target.secondAccordionItemTrigger,
       false
     );
-    const secondAccordionItemContent =
-      await radixAccordionPage.getAccordionItemContent(
-        radixAccordionPage.secondAccordionItemTrigger
-      );
+    const secondAccordionItemContent = await target.getAccordionItemContent(
+      target.secondAccordionItemTrigger
+    );
     await expect(secondAccordionItemContent).not.toBeVisible();
 
-    await expect(radixAccordionPage.thirdAccordionItemTrigger).toBeVisible();
-    await accordion.exceptTriggerOpen(
-      radixAccordionPage.thirdAccordionItemTrigger,
+    await expect(target.thirdAccordionItemTrigger).toBeVisible();
+    await accordion.exceptTriggerIsOpen(
+      target.thirdAccordionItemTrigger,
       false
     );
-    const thirdAccordionItemContent =
-      await radixAccordionPage.getAccordionItemContent(
-        radixAccordionPage.thirdAccordionItemTrigger
-      );
+    const thirdAccordionItemContent = await target.getAccordionItemContent(
+      target.thirdAccordionItemTrigger
+    );
     await expect(thirdAccordionItemContent).not.toBeVisible();
+  });
+
+  test("should open and close the accordion", async ({ page }) => {
+    const target = new Target(page);
+    await target.goto();
 
     // Open the second accordion
-    await radixAccordionPage.secondAccordionItemTrigger.click();
-    await accordion.exceptTriggerOpen(
-      radixAccordionPage.secondAccordionItemTrigger,
+    await target.secondAccordionItemTrigger.click();
+    await accordion.exceptTriggerIsOpen(
+      target.secondAccordionItemTrigger,
       true
     );
-    await accordion.exceptTriggerOpen(
-      radixAccordionPage.firstAccordionItemTrigger,
+    await accordion.exceptTriggerIsOpen(
+      target.firstAccordionItemTrigger,
       false
     );
-    await accordion.exceptTriggerOpen(
-      radixAccordionPage.thirdAccordionItemTrigger,
+    await accordion.exceptTriggerIsOpen(
+      target.thirdAccordionItemTrigger,
       false
+    );
+    const secondAccordionItemContent = await target.getAccordionItemContent(
+      target.secondAccordionItemTrigger
     );
     await expect(secondAccordionItemContent).toBeVisible();
 
     // Open the third accordion
-    await radixAccordionPage.thirdAccordionItemTrigger.click();
-    await accordion.exceptTriggerOpen(
-      radixAccordionPage.thirdAccordionItemTrigger,
-      true
-    );
-    await accordion.exceptTriggerOpen(
-      radixAccordionPage.secondAccordionItemTrigger,
+    await target.thirdAccordionItemTrigger.click();
+    await accordion.exceptTriggerIsOpen(target.thirdAccordionItemTrigger, true);
+    await accordion.exceptTriggerIsOpen(
+      target.secondAccordionItemTrigger,
       false
     );
-    await accordion.exceptTriggerOpen(
-      radixAccordionPage.firstAccordionItemTrigger,
+    await accordion.exceptTriggerIsOpen(
+      target.firstAccordionItemTrigger,
       false
+    );
+    const thirdAccordionItemContent = await target.getAccordionItemContent(
+      target.thirdAccordionItemTrigger
     );
     await expect(thirdAccordionItemContent).toBeVisible();
   });

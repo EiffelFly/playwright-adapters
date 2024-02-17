@@ -1,6 +1,6 @@
 import { Locator, Page, expect } from "@playwright/test";
 
-async function getAccordionContent(
+async function getAccordionItemContent(
   page: Page,
   accordionItem: Locator
 ): Promise<Locator> {
@@ -10,7 +10,7 @@ async function getAccordionContent(
   return page.locator(`#${escapedAriaControl}`);
 }
 
-async function exceptTriggerOpen(triggerLocator: Locator, open: boolean) {
+async function exceptTriggerIsOpen(triggerLocator: Locator, open: boolean) {
   await expect(triggerLocator).toHaveAttribute(
     "data-state",
     open ? "open" : "closed"
@@ -18,6 +18,6 @@ async function exceptTriggerOpen(triggerLocator: Locator, open: boolean) {
 }
 
 export const accordion = {
-  getAccordionContent,
-  exceptTriggerOpen,
+  getAccordionItemContent,
+  exceptTriggerIsOpen,
 };

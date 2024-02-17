@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { accordion } from "./accordion";
 
-export class RadixAccordionPage {
+export class Target {
   readonly page: Page;
   readonly pagePath = "/primitives/docs/components/accordion";
   readonly firstAccordionItemTrigger: Locator;
@@ -26,6 +26,6 @@ export class RadixAccordionPage {
   }
 
   async getAccordionItemContent(itemTrigger: Locator): Promise<Locator> {
-    return await accordion.getAccordionContent(this.page, itemTrigger);
+    return await accordion.getAccordionItemContent(this.page, itemTrigger);
   }
 }
