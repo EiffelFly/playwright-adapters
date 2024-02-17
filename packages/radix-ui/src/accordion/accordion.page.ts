@@ -1,22 +1,22 @@
 import { Locator, Page } from "@playwright/test";
 import { accordion } from "./accordion";
 
-export class RadixAccordion {
+export class RadixAccordionPage {
   readonly page: Page;
   readonly pagePath = "/primitives/docs/components/accordion";
-  readonly firstTrigger: Locator;
-  readonly secondTrigger: Locator;
-  readonly thirdTrigger: Locator;
+  readonly firstAccordionItemTrigger: Locator;
+  readonly secondAccordionItemTrigger: Locator;
+  readonly thirdAccordionItemTrigger: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.firstTrigger = page.getByRole("button", {
+    this.firstAccordionItemTrigger = page.getByRole("button", {
       name: "Is it accessible?",
     });
-    this.secondTrigger = page.getByRole("button", {
+    this.secondAccordionItemTrigger = page.getByRole("button", {
       name: "Is it unstyled?",
     });
-    this.thirdTrigger = page.getByRole("button", {
+    this.thirdAccordionItemTrigger = page.getByRole("button", {
       name: "Can it be animated?",
     });
   }
@@ -25,7 +25,7 @@ export class RadixAccordion {
     await this.page.goto(this.pagePath);
   }
 
-  async getContent(trigger: Locator): Promise<Locator> {
-    return await accordion.getAccordionContent(this.page, trigger);
+  async getAccordionItemContent(itemTrigger: Locator): Promise<Locator> {
+    return await accordion.getAccordionContent(this.page, itemTrigger);
   }
 }
