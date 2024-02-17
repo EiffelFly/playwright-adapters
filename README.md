@@ -7,7 +7,7 @@ This library provides a set of adapters toward some popular UI libraries and fra
 ### Radix UI
 
 - [x] [Accordion](https://www.radix-ui.com/primitives/docs/components/accordion)
-- [] [Alert Dialog](https://www.radix-ui.com/primitives/docs/components/alert-dialog)
+- [x] [Alert Dialog](https://www.radix-ui.com/primitives/docs/components/alert-dialog)
 - [] [Aspect Ratio](https://www.radix-ui.com/primitives/docs/components/aspect-ratio)
 - [] [Avatar](https://www.radix-ui.com/primitives/docs/components/avatar)
 - [] [Checkbox](https://www.radix-ui.com/primitives/docs/components/checkbox)

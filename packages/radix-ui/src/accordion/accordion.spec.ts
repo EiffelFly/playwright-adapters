@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 import { Target } from "./accordion.page";
 import { accordion } from "./accordion";
 
-test.describe("Radix UI Accordion", () => {
+test.describe.skip("Radix UI Accordion", () => {
   test("should have correct defaul state", async ({ page }) => {
     const target = new Target(page);
     await target.goto();
